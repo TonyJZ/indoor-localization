@@ -1,0 +1,86 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Compiled source and libraries
+*.o
+*.a
+*.so
+*.x
+*.dll
+*.lib
+*.exe
+*.VC.db
+*.VC.opendb
+*.sdf
+*.suo
+*.opensdf
+*.vcxproj.user
+*.vcxproj.filters
+*.zip
+*.rar
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+*.bak
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Compiled binaries and temporary library files
+bin
+lib
+ipch
+.vs
+debug
+release
+x64
+build/vs2015
+# build/vs2013
+sample_data
+3rdparty/bin
+3rdparty/lib
+3rdparty/zip
+3rdparty/source
+
+
+#deps/zip
+deps/source

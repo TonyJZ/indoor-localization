@@ -1,0 +1,83 @@
+#GDAL_INC=/mnt/hgfs/OpenRS/external/linux/include/gdal
+#PROJ_INC=/mnt/hgfs/OpenRS/external/include/proj
+
+#LINUX_LIB=/mnt/hgfs/OpenRS/external/linux/lib5.5
+3rdparty_INC=/usr/include
+EIGEN_INC=$(3rdparty_INC)/eigen3
+FLANN_INC=$(3rdparty_INC)/flann
+BOOST_INC=$(3rdparty_INC)/boost
+PCL_INC=$(3rdparty_INC)/pcl-1.8
+
+3rdparty_LIB=/usr/lib
+CGAL_LIB=/usr/local/lib
+
+BIN=release
+
+indoorLoc_DIR = /mnt/hgfs/code_indoor_location
+BIN_DIR = $(indoorLoc_DIR)/bin/linux/$(BIN)
+indoorLoc_INC=$(indoorLoc_DIR)/include
+indoorLoc_SRC=$(indoorLoc_DIR)/src
+indoorLoc_UTEST=$(indoorLoc_DIR)/utest
+#DSM_SRC=$(ORS_DIR)/DSM/src
+#DPS_INC=$(ORS_DIR)/DPS/include
+#DSM_INC=$(ORS_DIR)/DSM/include
+#EXT_INC=$(ORS_DIR)/external/include
+#GL_INC=/usr/share/mesa/source/include/
+#STIN_INC = $(DSM_INC)/STIN
+
+#for Modules
+#MODULE_DIR=$(BIN_DIR)/modules
+#MODULE_DLL=$(MODULE_DIR)/$(MODULE).so
+
+#for Plugins
+#PLUGIN_DIR=$(BIN_DIR)/plugins
+#PLUGIN_DLL=$(PLUGIN_DIR)/$(PLUGIN).so
+
+#for Applications
+APP_EXE=$(BIN_DIR)/$(APP).x
+
+#for non-plugin DLL
+COMMON_DLL=$(BIN_DIR)/lib$(DLL).so
+
+#for Modules only
+#SRC_DIR= $(ORS_SRC)/$(MODULE)
+
+OBJ_DIR=./$(BIN)
+
+ICPC_LIB = /opt/intel/cce/10.1.015/lib/
+
+#DSM_LIB = /
+
+CC = g++
+CXX = g++
+LD = g++
+
+#CC=mpicc
+#CXX=mpicxx
+#LD=mpicxx
+
+                                                                                                     
+ifeq ($(BIN),debug)
+
+CFLAGS = -g -O0 -fPIC -I$(PROJ_INC) -I$(GDAL_INC) -I$(ORS_INC)  -I$(DSM_INC) -I$(EXT_INC) -I$(GL_INC) -I$(STIN_INC) -DLINUX64 -D_DEBUG
+CXXFLAGS=$(CFLAGS) $(CPPFLAGS)
+
+LNKFLAGS =  -O0 -g -Wl,-L$(LINUX_LIB) -L$(ICPC_LIB) -L$(BIN_DIR)
+
+else
+
+#CFLAGS =  -fPIC -O2 -openmp -openmp-lib=compat -I$(GDAL_INC) -I$(ORS_INC) -I$(DPS_INC) -I$(DSM_INC) -I$(EXT_INC) -I$(GL_INC) -DLINUX64
+
+CFLAGS =  -fPIC -O2 -std=c++11 -I$(3rdparty_INC) -I$(EIGEN_INC) -I$(FLANN_INC) -I$(BOOST_INC) -I$(PCL_INC) -I$(indoorLoc_INC) -DLINUX64
+
+#CFLAGS =  -fPIC -O2 -fopenmp  -I$(PROJ_INC) -I$(GDAL_INC) -I$(ORS_INC)  -I$(DSM_INC) -I$(EXT_INC) -I$(GL_INC) -I$(STIN_INC) -DLINUX64
+
+CXXFLAGS=$(CFLAGS)
+
+#LNKFLAGS = -fPIC -openmp -openmp-lib=compat -O0 -Wl,-L$(LINUX_LIB) -L$(ICPC_LIB)  -L$(BIN_DIR) 
+
+LNKFLAGS = -fPIC -O0  -L$(BIN_DIR) -L$(ICPC_LIB) -L$(3rdparty_LIB) -L$(CGAL_LIB)
+
+#LNKFLAGS = -fPIC -fopenmp   -O0 -Wl,-L$(BIN_DIR) -L$(ICPC_LIB) 
+
+endif
